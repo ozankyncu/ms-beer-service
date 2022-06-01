@@ -1,6 +1,8 @@
 package com.kyncu.msbeerservice.web.controller;
 
+import com.kyncu.msbeerservice.services.BeerService;
 import com.kyncu.msbeerservice.web.model.BeerDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -8,23 +10,27 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/beer")
 @RestController
 public class BeerController {
 
+    // with the starting of spring framework 4.2 autowired annotation not necessary for constructor argument.
+    private final BeerService beerService;
+
     @GetMapping("/{beerId}")
-    public ResponseEntity<BeerDto> getBeerById(@Validated @PathVariable("beerId")UUID beerId) {
-        return new ResponseEntity<>(BeerDto.builder().build(), HttpStatus.OK);
+    public ResponseEntity<BeerDto> getBeerById(@Validated @PathVariable("beerId") UUID beerId) {
+        return new ResponseEntity<>(beerService.getById(beerId), HttpStatus.OK);
     }
 
     @PostMapping
     public ResponseEntity<BeerDto> saveBeer(@RequestBody BeerDto beerDto) {
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(beerService.saveBeer(beerDto), HttpStatus.CREATED);
     }
 
     @PutMapping("/{beerId}")
     public ResponseEntity<BeerDto> updateBeer(@PathVariable("beerId") UUID beerId, @Validated @RequestBody BeerDto beerDto) {
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(beerService.updateBeer(beerId, beerDto), HttpStatus.NO_CONTENT);
     }
 
 }
