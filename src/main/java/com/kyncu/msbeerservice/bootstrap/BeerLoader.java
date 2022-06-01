@@ -2,6 +2,7 @@ package com.kyncu.msbeerservice.bootstrap;
 
 import com.kyncu.msbeerservice.domain.Beer;
 import com.kyncu.msbeerservice.repository.BeerRepository;
+import com.kyncu.msbeerservice.web.model.BeerStyleEnum;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -9,6 +10,10 @@ import java.math.BigDecimal;
 
 @Component
 public class BeerLoader implements CommandLineRunner {
+
+    public static final String BEER_1_UPC = "0631234200036";
+    public static final String BEER_2_UPC = "0631234300019";
+    public static final String BEER_3_UPC = "0083783375213";
 
     private final BeerRepository beerRepository;
 
@@ -28,7 +33,7 @@ public class BeerLoader implements CommandLineRunner {
                     .beerStyle("IPA")
                     .quantityBrew(200)
                     .minOnHand(12)
-                    .upc(337010000001L)
+                    .upc(BEER_1_UPC)
                     .price(BigDecimal.valueOf(12.95))
                     .build());
             beerRepository.save(Beer.builder()
@@ -36,8 +41,16 @@ public class BeerLoader implements CommandLineRunner {
                     .beerStyle("PALE_ALE")
                     .quantityBrew(200)
                     .minOnHand(12)
-                    .upc(337010000002L)
+                    .upc(BEER_2_UPC)
                     .price(BigDecimal.valueOf(11.95))
+                    .build());
+            beerRepository.save(Beer.builder()
+                    .beerName("Pinball Porter")
+                    .beerStyle(BeerStyleEnum.PALE_ALE.name())
+                    .minOnHand(12)
+                    .quantityBrew(200)
+                    .price(new BigDecimal("12.95"))
+                    .upc(BEER_3_UPC)
                     .build());
         }
 
