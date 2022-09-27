@@ -7,7 +7,7 @@ jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/openjdk:15.0.2-browsers
+      - image: circleci/openjdk:15-browsers-legacy
 
     working_directory: ~/kyncu-repo
 
