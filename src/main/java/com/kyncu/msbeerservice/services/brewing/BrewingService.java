@@ -1,4 +1,4 @@
-package com.kyncu.msbeerservice.services;
+package com.kyncu.msbeerservice.services.brewing;
 
 import com.kyncu.msbeerservice.config.JmsConfig;
 import com.kyncu.msbeerservice.domain.Beer;
