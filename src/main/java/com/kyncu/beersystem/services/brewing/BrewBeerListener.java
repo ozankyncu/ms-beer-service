@@ -2,10 +2,10 @@ package com.kyncu.beersystem.services.brewing;
 
 import com.kyncu.beersystem.config.JmsConfig;
 import com.kyncu.beersystem.domain.Beer;
-import com.kyncu.beersystem.common.events.BrewBeerEvent;
-import com.kyncu.beersystem.common.events.NewInventoryEvent;
+import com.kyncu.beersystem.brewery.model.events.BrewBeerEvent;
+import com.kyncu.beersystem.brewery.model.events.NewInventoryEvent;
 import com.kyncu.beersystem.repository.BeerRepository;
-import com.kyncu.beersystem.web.model.BeerDto;
+import com.kyncu.beersystem.brewery.model.BeerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;

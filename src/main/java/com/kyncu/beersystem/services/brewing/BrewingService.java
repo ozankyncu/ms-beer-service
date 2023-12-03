@@ -2,7 +2,7 @@ package com.kyncu.beersystem.services.brewing;
 
 import com.kyncu.beersystem.config.JmsConfig;
 import com.kyncu.beersystem.domain.Beer;
-import com.kyncu.beersystem.common.events.BrewBeerEvent;
+import com.kyncu.beersystem.brewery.model.events.BrewBeerEvent;
 import com.kyncu.beersystem.repository.BeerRepository;
 import com.kyncu.beersystem.services.inventory.BeerInventoryService;
 import com.kyncu.beersystem.web.mappers.BeerMapper;

@@ -1,7 +1,7 @@
 package com.kyncu.beersystem.web.mappers;
 
 import com.kyncu.beersystem.domain.Beer;
-import com.kyncu.beersystem.web.model.BeerDto;
+import com.kyncu.beersystem.brewery.model.BeerDto;
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 

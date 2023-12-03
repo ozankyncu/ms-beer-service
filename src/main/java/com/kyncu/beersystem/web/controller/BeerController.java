@@ -1,9 +1,9 @@
 package com.kyncu.beersystem.web.controller;
 
 import com.kyncu.beersystem.services.BeerService;
-import com.kyncu.beersystem.web.model.BeerDto;
-import com.kyncu.beersystem.web.model.BeerPagedList;
-import com.kyncu.beersystem.web.model.BeerStyleEnum;
+import com.kyncu.beersystem.brewery.model.BeerDto;
+import com.kyncu.beersystem.brewery.model.BeerPagedList;
+import com.kyncu.beersystem.brewery.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;

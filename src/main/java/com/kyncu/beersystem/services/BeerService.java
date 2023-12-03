@@ -1,8 +1,8 @@
 package com.kyncu.beersystem.services;
 
-import com.kyncu.beersystem.web.model.BeerDto;
-import com.kyncu.beersystem.web.model.BeerPagedList;
-import com.kyncu.beersystem.web.model.BeerStyleEnum;
+import com.kyncu.beersystem.brewery.model.BeerDto;
+import com.kyncu.beersystem.brewery.model.BeerPagedList;
+import com.kyncu.beersystem.brewery.model.BeerStyleEnum;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.UUID;

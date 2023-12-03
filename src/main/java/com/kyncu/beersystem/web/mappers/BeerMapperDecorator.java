@@ -2,7 +2,7 @@ package com.kyncu.beersystem.web.mappers;
 
 import com.kyncu.beersystem.domain.Beer;
 import com.kyncu.beersystem.services.inventory.BeerInventoryService;
-import com.kyncu.beersystem.web.model.BeerDto;
+import com.kyncu.beersystem.brewery.model.BeerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class BeerMapperDecorator implements BeerMapper {

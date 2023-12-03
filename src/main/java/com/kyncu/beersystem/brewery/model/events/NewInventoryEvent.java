@@ -1,6 +1,6 @@
-package com.kyncu.beersystem.common.events;
+package com.kyncu.beersystem.brewery.model.events;
 
-import com.kyncu.beersystem.web.model.BeerDto;
+import com.kyncu.beersystem.brewery.model.BeerDto;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor

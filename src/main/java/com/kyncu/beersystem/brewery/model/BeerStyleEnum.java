@@ -1,4 +1,4 @@
-package com.kyncu.beersystem.web.model;
+package com.kyncu.beersystem.brewery.model;
 
 public enum BeerStyleEnum {
     LAGER, PILSNER, STOUT, GOSE, PORTER, ALE, WHEAT, IPA, PALE_ALE, SAISON

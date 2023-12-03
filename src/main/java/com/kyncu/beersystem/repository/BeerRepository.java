@@ -1,7 +1,7 @@
 package com.kyncu.beersystem.repository;
 
 import com.kyncu.beersystem.domain.Beer;
-import com.kyncu.beersystem.web.model.BeerStyleEnum;
+import com.kyncu.beersystem.brewery.model.BeerStyleEnum;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

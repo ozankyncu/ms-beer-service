@@ -2,7 +2,7 @@ package com.kyncu.beersystem.bootstrap;
 
 import com.kyncu.beersystem.domain.Beer;
 import com.kyncu.beersystem.repository.BeerRepository;
-import com.kyncu.beersystem.web.model.BeerStyleEnum;
+import com.kyncu.beersystem.brewery.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;

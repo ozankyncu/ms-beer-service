@@ -1,4 +1,4 @@
-package com.kyncu.beersystem.web.model;
+package com.kyncu.beersystem.brewery.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
