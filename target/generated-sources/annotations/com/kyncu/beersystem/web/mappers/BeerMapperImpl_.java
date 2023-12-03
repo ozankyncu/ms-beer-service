@@ -1,10 +1,8 @@
-package com.kyncu.msbeerservice.web.mappers;
+package com.kyncu.beersystem.web.mappers;
 
-import com.kyncu.msbeerservice.domain.Beer;
-import com.kyncu.msbeerservice.domain.Beer.BeerBuilder;
-import com.kyncu.msbeerservice.web.model.BeerDto;
-import com.kyncu.msbeerservice.web.model.BeerDto.BeerDtoBuilder;
-import com.kyncu.msbeerservice.web.model.BeerStyleEnum;
+import com.kyncu.beersystem.brewery.model.BeerDto;
+import com.kyncu.beersystem.brewery.model.BeerStyleEnum;
+import com.kyncu.beersystem.domain.Beer;
 import javax.annotation.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-06-07T22:13:38+0300",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 11.0.9.1 (JetBrains s.r.o.)"
+    date = "2023-12-03T12:58:44+0300",
+    comments = "version: 1.5.0.Final, compiler: javac, environment: Java 17.0.6 (JetBrains s.r.o.)"
 )
 @Component
 @Qualifier("delegate")
@@ -28,7 +26,7 @@ public class BeerMapperImpl_ implements BeerMapper {
             return null;
         }
 
-        BeerBuilder beer = Beer.builder();
+        Beer.BeerBuilder beer = Beer.builder();
 
         beer.id( dto.getId() );
         if ( dto.getVersion() != null ) {
@@ -52,7 +50,7 @@ public class BeerMapperImpl_ implements BeerMapper {
             return null;
         }
 
-        BeerDtoBuilder beerDto = BeerDto.builder();
+        BeerDto.BeerDtoBuilder beerDto = BeerDto.builder();
 
         beerDto.id( beer.getId() );
         if ( beer.getVersion() != null ) {
@@ -76,7 +74,7 @@ public class BeerMapperImpl_ implements BeerMapper {
             return null;
         }
 
-        BeerDtoBuilder beerDto = BeerDto.builder();
+        BeerDto.BeerDtoBuilder beerDto = BeerDto.builder();
 
         beerDto.id( beer.getId() );
         if ( beer.getVersion() != null ) {
