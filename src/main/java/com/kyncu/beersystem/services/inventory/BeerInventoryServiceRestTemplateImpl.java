@@ -29,11 +29,11 @@ public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryServic
         this.beerInventoryServiceHost = beerInventoryServiceHost;
     }
 
-    public BeerInventoryServiceRestTemplateImpl(RestTemplateBuilder restTemplateBuilder,
-                                                @Value("${kyncu.brewery.inventory-user}") String inventoryUser,
-                                                @Value("${kyncu.brewery.inventory-password}") String inventoryPassword) {
-        this.restTemplate = restTemplateBuilder
+    public BeerInventoryServiceRestTemplateImpl(RestTemplateBuilder restTemplateBuilder) {
+       /* this.restTemplate = restTemplateBuilder
                 .basicAuthentication(inventoryUser, inventoryPassword)
+                .build();*/
+        this.restTemplate = restTemplateBuilder
                 .build();
     }
 
