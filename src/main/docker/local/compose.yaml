@@ -20,6 +20,6 @@ services:
        depends_on:
          - eureka
        environment:
-         EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaUser:eurekaPass@localhost:8761/eureka
+         EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaUser:eurekaPass@eureka:8761/eureka
 
 
