@@ -1,25 +1,120 @@
 version: "3.8"
 services:
   jms:
-       image: vromero/activemq-artemis
-       ports:
-         - 8161:8161
-         - 61616:61616
+    image: rmohr/activemq:5.15.9-alpine
+    ports:
+      - "8161:8161"
+      - "61616:61616"
   zipkin:
-       image: openzipkin/zipkin
-       ports:
-         - 9411:9411
+    image: openzipkin/zipkin:2.23
+    ports:
+      - "9411:9411"
   eureka:
-       image: ozankyncu/ms-beer-eureka
-       ports:
-         - 8761:8761
+    image: ozankyncu/ms-beer-eureka
+    ports:
+      - "8761:8761"
+  gateway:
+    image: ozankyncu/ms-beer-gateway
+    ports:
+      - "9090:9090"
+    depends_on:
+      - eureka
+      - config
+      - inventory-service
+      - beer-service
+      - order-service
+    environment:
+      SPRING_PROFILES_ACTIVE: local-discovery
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:  http://eurekaUser:eurekaPass@eureka:8761/eureka/
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+      SPRING_ZIPKIN_BASEURL: http://zipkin:9411
+    restart: on-failure
   config:
-       image: ozankyncu/ms-beer-config-server
-       ports:
-         - 8888:8888
-       depends_on:
-         - eureka
-       environment:
-         EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaUser:eurekaPass@eureka:8761/eureka
-
-
+    image: ozankyncu/ms-beer-config-server
+    ports:
+      - "8888:8888"
+    depends_on:
+      - eureka
+    environment:
+      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eurekaUser:eurekaPass@eureka:8761/eureka/
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+  beer-service:
+    image: ozankyncu/ms-beer-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eureka
+      - config
+      - jms
+      - mysql-beer
+    environment:
+      SPRING_PROFILES_ACTIVE: local-discovery,localmysql
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://kyncuozan:kyncuozanPassword@config:8888"}}}}'
+      EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE: http://eurekaUser:eurekaPass@eureka:8761/eureka/
+      SPRING_ZIPKIN_BASE-URL: http://zipkin:9411
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-beer:3306/beerservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+    restart: on-failure
+  mysql-beer:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: password
+      MYSQL_USER: beer_service
+      MYSQL_DATABASE: beerservice
+  inventory-service:
+    image: ozankyncu/ms-beer-inventory-service
+    network_mode: host
+    ports:
+      - "8082:8082"
+    depends_on:
+      - eureka
+      - config
+      - jms
+      - mysql-inventory
+    environment:
+      SPRING_PROFILES_ACTIVE: local-discovery,localmysql
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://kyncuozan:kyncuozanPassword@config:8888"}}}}'
+      EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE: http://eurekaUser:eurekaPass@eureka:8761/eureka/
+      SPRING_ZIPKIN_BASE-URL: http://zipkin:9411
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-beer:3306/beerinventoryservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      SPRING_ACTIVEMQ_BROKER-URL: tcp://jms:61616
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+    restart: on-failure
+  mysql-inventory:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: password
+      MYSQL_USER: beer_inventory_service
+      MYSQL_DATABASE: beerinventoryservice
+  order-service:
+    image: ozankyncu/ms-beer-order-service
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eureka
+      - config
+      - jms
+      - beer-service
+      - mysql-order
+    environment:
+      SPRING_PROFILES_ACTIVE: local-discovery,localmysql
+      SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://kyncuozan:kyncuozanPassword@config:8888"}}}}'
+      EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE: http://eurekaUser:eurekaPass@eureka:8761/eureka/
+      SPRING_ZIPKIN_BASE-URL: http://zipkin:9411
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-beer:3306/beerorderservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+      SPRING_ACTIVEMQ_BROKER-URL: tcp://jms:61616
+      EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
+      KYNCU-BEER-SERVICE-HOST: http://beer-service:8080
+    restart: on-failure
+  mysql-order:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: password
+      MYSQL_USER: beer_order_service
+      MYSQL_DATABASE: beerorderservice
