@@ -52,6 +52,7 @@ services:
       SPRING_APPLICATION_JSON: '{"spring": {"cloud": {"config": {"uri": "http://kyncuozan:kyncuozanPassword@config:8888"}}}}'
       EUREKA_CLIENT_SERVICE-URL_DEFAULTZONE: http://eurekaUser:eurekaPass@eureka:8761/eureka/
       SPRING_ZIPKIN_BASE-URL: http://zipkin:9411
+      SPRING_ACTIVEMQ_BROKER-URL: tcp://jms:61616
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql-beer:3306/beerservice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
       EUREKA_INSTANCE_PREFER_IP_ADDRESS: 'true'
     restart: on-failure
